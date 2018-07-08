@@ -4,7 +4,9 @@
   "description": "A simple boilerplate for react and redux(With thunk) applications. It includes unit testing with jest.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "build": "rimraf ./dist && webpack",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,18 @@
   "bugs": {
     "url": "https://github.com/karan-rawal/react-redux-boilerplate/issues"
   },
-  "homepage": "https://github.com/karan-rawal/react-redux-boilerplate#readme"
+  "homepage": "https://github.com/karan-rawal/react-redux-boilerplate#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  }
 }
