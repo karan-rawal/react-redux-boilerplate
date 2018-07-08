@@ -8,6 +8,9 @@ const DIST_PATH = path.resolve(__dirname, 'dist');
 const config = {
   mode: 'development',
   entry: `${SRC_PATH}/js/index.jsx`,
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   output: {
     filename: 'index.js',
     path: DIST_PATH,
@@ -17,6 +20,14 @@ const config = {
     hot: true,
     open: true,
     inline: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        use: 'babel-loader',
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
