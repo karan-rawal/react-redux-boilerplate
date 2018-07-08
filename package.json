@@ -1,0 +1,27 @@
+{
+  "name": "react-redux-boilerplate",
+  "version": "1.0.0",
+  "description": "A simple boilerplate for react and redux(With thunk) applications. It includes unit testing with jest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karan-rawal/react-redux-boilerplate.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "boilerplate",
+    "jest",
+    "unit",
+    "testing"
+  ],
+  "author": "Karan Rawal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karan-rawal/react-redux-boilerplate/issues"
+  },
+  "homepage": "https://github.com/karan-rawal/react-redux-boilerplate#readme"
+}
