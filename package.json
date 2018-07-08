@@ -29,8 +29,7 @@
   "homepage": "https://github.com/karan-rawal/react-redux-boilerplate#readme",
   "dependencies": {
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7"
+    "react-dom": "^16.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
