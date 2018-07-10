@@ -1,7 +1,11 @@
 {
     "extends": "airbnb",
     "globals": {
-      "document": true
+      "document": true,
+      "beforeEach": true,
+      "describe": true,
+      "it": true,
+      "expect": true
     },
     "rules": {
       "react/destructuring-assignment": 1
