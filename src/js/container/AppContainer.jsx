@@ -59,7 +59,7 @@ class AppContainer extends React.Component {
         {
           !!data && (
             <div>
-              <AppComponent originalText={plainText} />
+              <AppComponent originalText={'a quick brown fox jumped over the lazy cow'} />
             </div>
           )
         }

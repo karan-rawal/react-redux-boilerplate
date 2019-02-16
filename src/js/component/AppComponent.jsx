@@ -36,6 +36,7 @@ export default class AppComponent extends React.Component {
     this.onTextChange = this.onTextChange.bind(this);
     this.onStart = this.onStart.bind(this);
     this.onIntervalTick = this.onIntervalTick.bind(this);
+    this.textInput = React.createRef();
   }
 
   onIntervalTick() {
@@ -64,11 +65,19 @@ export default class AppComponent extends React.Component {
 
     timeDiff.subtract(30, 'minutes');
     this.setState({
+      currentWordStartIndex: 0,
+      remainingText: this.props.originalText, // remaining text
+      correctText: '', // text that has been typed and correct
+      typedText: '', // text that is currently in input
       gamerunning: true,
       timeStart: moment(),
       endTime: timeDiff,
       gameover: false,
+    }, () => {
+      this.textInput.current.value = '';
+      this.textInput.current.focus();
     });
+
 
     clearInterval(this.tickInterval);
     this.tickInterval = setInterval(() => {
@@ -79,7 +88,7 @@ export default class AppComponent extends React.Component {
   onTextChange(e) {
     const val = e.target.value;
 
-    if (this.state.correctText === this.props.originalText) {
+    if ((this.state.correctText + val).length >= this.props.originalText.length) {
       alert("Your speed: " + this.state.wpm);
       this.setState({
         gameover: true,
@@ -110,7 +119,7 @@ export default class AppComponent extends React.Component {
     const minutes = duration.minutes();
     const wordsCount = this.state.correctText.trimRight().split(' ').length;
     const totalTimeElapsedSeconds = (minutes) * 60 + seconds;
-    const wordsPerSecond = 60 / totalTimeElapsedSeconds;
+    const wordsPerSecond = wordsCount / totalTimeElapsedSeconds;
     return wordsPerSecond * 60;
   }
 
@@ -173,6 +182,7 @@ export default class AppComponent extends React.Component {
           </span>
         </div>
         <input
+          ref={this.textInput}
           disabled={!this.state.gamerunning || this.state.gameover}
           onChange={this.onTextChange}
           defaultValue={this.state.typedText}
