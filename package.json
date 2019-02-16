@@ -31,12 +31,14 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "lodash": "^4.17.10",
+    "moment": "^2.24.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "text-diff": "^1.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

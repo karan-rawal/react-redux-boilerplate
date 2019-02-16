@@ -1,43 +1,89 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchTextData } from '../action/AppActions';
 import AppComponent from '../component/AppComponent';
-import { getPosts } from '../action/AppActions';
 
 class AppContainer extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-    console.log('hello world');
+  static formatPlainTextIntoArray(text = 'Karan stasdf asdf') {
+    // TODO Remove later
+    const split = text.split('');
+
+    let wordIndex = 0;
+    const formattedArray = split.map((val, index) => {
+
+      if (val === ' ') {
+        wordIndex += 1;
+      }
+
+      return {
+        letter: val,
+        wordIndex,
+        letterIndex: index,
+      };
+    });
+
+    console.error(formattedArray);
   }
 
-  componentWillMount() {
-    this.props.getPosts();
+  constructor(props) {
+    super(props);
+    this.props.fetchTextData();
   }
+
 
   render() {
-    const { isFetchingPosts, error, posts } = this.props.reducer;
+    const { textData } = this.props;
+    const { isLoading, data, error } = textData;
+    const rawText = (data && data.text_out) || '';
+    const plainText = rawText.replace(/(&nbsp;|<([^>]+)>)/ig, '');
+
     return (
-      <AppComponent isFetchingPosts={isFetchingPosts} error={error} posts={posts} />
+      <div>
+        {
+          isLoading && (
+            <div>
+              Loading...
+            </div>
+          )
+        }
+
+        {
+          !!error && (
+            <div>
+              Some Error Occurred.
+            </div>
+          )
+        }
+
+        {
+          !!data && (
+            <div>
+              <AppComponent originalText={plainText} />
+            </div>
+          )
+        }
+
+      </div>
     );
   }
 }
 
 AppContainer.propTypes = {
-  getPosts: PropTypes.func.isRequired,
-  reducer: PropTypes.shape({
-    isFetchingPosts: PropTypes.bool,
-    posts: PropTypes.arrayOf(PropTypes.shape({})),
-    error: PropTypes.string,
-  }).isRequired,
+  fetchTextData: PropTypes.func.isRequired,
+  textData: PropTypes.shape({
+    isLoading: PropTypes.bool,
+    data: PropTypes.any,
+    error: PropTypes.any,
+  }),
 };
 
 const mapStateToProps = state => ({
-  reducer: state.AppReducer,
+  textData: state.AppReducer.textData,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getPosts: () => { dispatch(getPosts()); },
+  fetchTextData: () => { dispatch(fetchTextData()); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

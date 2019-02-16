@@ -1,25 +1,21 @@
-import _ from 'lodash';
-import Actions from '../action';
+/* eslint-disable default-case */
+import { assign } from 'lodash';
+import actions from '../constant/actions';
 
 const initialState = {
-  isFetchingPosts: false,
-  posts: [],
-  error: null,
+  textData: {
+    isLoading: true,
+    data: undefined,
+    error: undefined,
+  },
 };
 
 const AppReducer = (state = initialState, action) => {
-  let tempState = _.assign({}, state);
-
+  const tempState = assign({}, state);
   switch (action.type) {
-    case Actions.ACTION_SET_POSTS_STATUS:
-      tempState.isFetchingPosts = action.payload.isFetchingPosts;
-      tempState.error = action.payload.error;
+    case actions.SET_TEXT_DATA:
+      tempState.textData = assign({}, action.payload);
       break;
-    case Actions.ACTION_SET_POSTS:
-      tempState.posts = action.payload.posts;
-      break;
-    default:
-      tempState = _.assign({}, state);
   }
   return tempState;
 };

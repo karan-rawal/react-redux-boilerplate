@@ -1,29 +1,27 @@
 import axios from 'axios';
-import Actions from '.';
 import ApiEndpoints from '../constant/api-endpoints';
+import actions from '../constant/actions';
 
-export const setPostsStatus = ({ isFetching, error }) => ({
-  type: Actions.ACTION_SET_POSTS_STATUS,
+export const setTextData = ({
+  isLoading,
+  data,
+  error,
+}) => ({
+  type: actions.SET_TEXT_DATA,
   payload: {
-    isFetchingPosts: isFetching,
+    isLoading,
+    data,
     error,
   },
 });
 
-export const setPosts = ({ posts }) => ({
-  type: Actions.ACTION_SET_POSTS,
-  payload: {
-    posts,
-  },
-});
-
-export const getPosts = () => (dispatch) => {
-  dispatch(setPostsStatus({ isFetching: true, error: null }));
-  return axios.get(ApiEndpoints.getPosts)
+export const fetchTextData = () => (dispatch) => {
+  dispatch(setTextData({ isLoading: true }));
+  return axios.get(ApiEndpoints.TEXT_DATA_API)
     .then((response) => {
-      dispatch(setPostsStatus({ isFetching: false, error: null }));
-      dispatch(setPosts({ posts: response.data }));
-    }).catch((error) => {
-      dispatch(setPostsStatus({ isFetching: false, error }));
+      dispatch(setTextData({ isLoading: false, data: response.data }));
+    })
+    .catch((error) => {
+      dispatch(setTextData({ isLoading: false, error }));
     });
 };

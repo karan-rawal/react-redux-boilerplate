@@ -1,3 +1,3 @@
 export default {
-  getPosts: 'https://jsonplaceholder.typicode.com/posts',
+  TEXT_DATA_API: 'http://www.randomtext.me/api/',
 };
